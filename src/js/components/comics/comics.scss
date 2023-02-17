@@ -1,0 +1,19 @@
+$columns: 6;
+
+.comics_wrapper {
+  background-color: gray;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  .comicsItem {
+    display: flex;
+    justify-content: center;
+    
+    width: calc(100% / $columns - 10px);
+    margin: 20px;
+    background-color: #fff;
+    p{
+        margin-bottom: 5px;
+    }
+  }
+}
