@@ -47,9 +47,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  .modal-content{
+    display: flex;
+    background-color: #f5f5f5;
+    justify-content: space-between;
+
+  }
   .character {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center; 
     background-color: #fff;
     width: 150px;
+    margin: 10px;
     img {
       width: 100%;
     }

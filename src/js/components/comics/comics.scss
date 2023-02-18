@@ -5,10 +5,11 @@ $columns: 6;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: space-between;
   .comicsItem {
     display: flex;
     justify-content: center;
-    
+    flex-direction: column-reverse;
     width: calc(100% / $columns - 10px);
     margin: 20px;
     background-color: #fff;

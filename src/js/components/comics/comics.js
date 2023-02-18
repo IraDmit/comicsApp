@@ -18,7 +18,7 @@ class comics {
   }
 
   renderContent(res) {
-    let content;
+    let content = "";
     res.forEach(({ id, title, thumbnail: { path, extension } }) => {
       const uri = API_URL + URL_COMICS + "/" + id + "/" + URL_CHARACTERS;
       const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
@@ -45,14 +45,15 @@ class comics {
       const uriComics = el.dataset.uri;
       el.addEventListener("click", (e) => {
         characters.render(uriComics);
-        ROOT_MODAL.classList.add('open');
+        ROOT_MODAL.classList.add("open");
       });
     });
-    ROOT_MODAL.addEventListener("click", e=>{
-      ROOT_MODAL.classList.remove('open');
-    })
+    ROOT_MODAL.addEventListener("click", ({ target }) => {
+      if (target.classList.contains("open")) {
+        ROOT_MODAL.classList.remove("open");
+      }
+    });
   }
-  
 }
 
 export default new comics();

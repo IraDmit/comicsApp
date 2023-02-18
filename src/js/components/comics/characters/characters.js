@@ -17,12 +17,13 @@ class characters {
 
     renderContent(arrCharacters){
 		console.log(arrCharacters)
-        let content;
+        let content ='';
         arrCharacters.forEach(({thumbnail:{path, extension}, name}) => {
             const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
             content += `<div class="character"> <img src="${imgSrc}"/><p class="name">${name}</div>`;
         });
-        ROOT_MODAL.innerHTML = content;
+        const characters_wrapper = `<div class="modal-content">${content}</div>`
+        ROOT_MODAL.innerHTML = characters_wrapper;
     }
 }
 
