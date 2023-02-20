@@ -1,20 +1,25 @@
-$columns: 6;
+@mixin columnCount($columns) {
+  width: calc(100% / $columns - 40px);
+} 
 
 .comics_wrapper {
   background-color: gray;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
   .comicsItem {
+    border-radius: 12px;
     display: flex;
     justify-content: center;
     flex-direction: column-reverse;
-    width: calc(100% / $columns - 10px);
+    @include columnCount(5);
     margin: 20px;
     background-color: #fff;
     p{
         margin-bottom: 5px;
+    }
+    @media (max-width: 1280px) {
+      @include columnCount(4);
     }
   }
 }

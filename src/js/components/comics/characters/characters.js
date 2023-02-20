@@ -11,12 +11,12 @@ import { ROOT_MODAL } from "../../../constants/root";
 class characters {
     async render(uri){
        const result = await getDataApi.getData(uri);
-		this.renderContent(result)
-        // console.log(result);
+		this.renderContent(result.comics)
+        return result.comics;
     }
 
     renderContent(arrCharacters){
-		console.log(arrCharacters)
+		// console.log(arrCharacters)
         let content ='';
         arrCharacters.forEach(({thumbnail:{path, extension}, name}) => {
             const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;

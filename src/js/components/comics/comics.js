@@ -6,15 +6,22 @@ import {
   IMG_NOT_AVAILABLE,
 } from "../../constants/api";
 import { getDataApi } from "../../helpers/getApi";
-import { ROOT_DIV, ROOT_MODAL } from "../../constants/root";
+import { ROOT_DIV, ROOT_MODAL, ROOT_PRELOADER } from "../../constants/root";
 import "./comics.scss";
 import characters from "./characters/characters";
 import error from "../error/error";
+import notification from "../notification/notification";
 
 class comics {
+  constructor() {
+    this.limit = null;
+  }
+
   async render() {
     const res = await getDataApi.getData(API_URL + URL_COMICS);
-    res ? this.renderContent(res) : error.render();
+    res ? this.renderContent(res.comics) : error.render();
+    ROOT_PRELOADER.classList.add("hide");
+    this.limit = res.limit;
   }
 
   renderContent(res) {
@@ -43,9 +50,15 @@ class comics {
   eventListener() {
     document.querySelectorAll(".comicsItem").forEach((el) => {
       const uriComics = el.dataset.uri;
-      el.addEventListener("click", (e) => {
-        characters.render(uriComics);
-        ROOT_MODAL.classList.add("open");
+      el.addEventListener("click", async (e) => {
+        const arr = await characters.render(uriComics);
+        console.log(arr);
+        if (arr.length != 0) {
+          ROOT_MODAL.classList.add("open");
+        } else {
+          await notification.render();
+          await notification.eventListener();
+        }
       });
     });
     ROOT_MODAL.addEventListener("click", ({ target }) => {
@@ -53,6 +66,23 @@ class comics {
         ROOT_MODAL.classList.remove("open");
       }
     });
+    document
+      .querySelector(".renderComics")
+      .addEventListener("click", async (e) => {
+        ROOT_PRELOADER.classList.remove("hide");
+        const res = await getDataApi.getData(
+          API_URL + URL_COMICS,
+          this.limit + 10
+        );
+        if (res) {
+          this.limit += 10;
+          this.renderContent(res.comics);
+          
+        } else {
+          e.target.remove();
+        }
+        ROOT_PRELOADER.classList.add("hide");
+      });
   }
 }
 

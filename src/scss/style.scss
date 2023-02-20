@@ -69,3 +69,28 @@
     visibility: visible;
   }
 }
+
+
+.preloader{
+  width: 100%;
+  height: 100%;
+  z-index: 1000000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color:aquamarine;
+  transition: .2s;
+  &.hide{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.renderComics{
+  padding: 20px 40px;
+  background-color:#da542e;
+  color: #fff;
+  text-align: center;
+  margin: 20px auto;
+  display: block;
+}
