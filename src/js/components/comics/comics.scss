@@ -3,7 +3,6 @@
 } 
 
 .comics_wrapper {
-  background-color: gray;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -20,6 +19,9 @@
     }
     @media (max-width: 1280px) {
       @include columnCount(4);
+    }
+    .date{
+      margin-left: auto;
     }
   }
 }

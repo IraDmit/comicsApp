@@ -5,8 +5,15 @@
     <div class="wrapper">
       @@include('html/header.html', {})
       <main class="page">
-        <div class="preloader"></div>
+        <div class="preloader">
+          <div class="spinner">
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+          </div>
+        </div>
         <div class="root"></div>
+        <div class="comicsense"></div>
         <button class="renderComics">More</button>
         <div class="modal"></div>
       </main>
@@ -15,3 +22,17 @@
     @@include('html/script.html', {})
   </body>
 </html>
+
+<!-- <div class="comicsWrapper">
+  <div class="comicsInfo">
+    <img src="${imgSrc}" />
+    <div class="info">
+      <a href="${resourceURI}">${title} <span> ${name}</span> </a>
+      ${creator}
+      <p class="date">${date.split("T")[0]}</p>
+      <p class="pageCount">${pageCount}</p>
+    </div>
+  </div>
+  ${characterWrapper}
+  ${description ? description : ""}
+  </div> -->

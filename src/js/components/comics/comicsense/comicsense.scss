@@ -1,0 +1,39 @@
+.comicsense {
+  background-color: rgba(#000, 0.8);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  .comicsWrapper {
+    transform: translateY(-50%);
+    width: 470px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    padding: 30px;
+    border-radius: 13px 0 0 13px;
+    .comicsInfo {
+      display: flex;
+      .info {
+        display: flex;
+        flex-direction: column;
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  &.open {
+    visibility: visible;
+    opacity: 1;
+    right: 500px;
+  }
+}
