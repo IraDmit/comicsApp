@@ -31,6 +31,19 @@ class GetDataApi {
             return false;
         }
     }
+    async getAllChar(url){
+        try{
+            const response = await axios.get(url, {
+                params:{
+                    apikey: API_KEY
+                }
+            })
+            return response.data.data.results;
+        } catch{
+            console.log(error.message);
+            return false;
+        }
+    }
 }
 
 export const getDataApi = new GetDataApi();

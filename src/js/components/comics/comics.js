@@ -93,9 +93,7 @@ class comics {
     this.comicsClickEvent(document.querySelectorAll(".comicsItem"));
     ROOT_MODAL.addEventListener("click", ({ target }) => {
       if (target.classList.contains("open")) {
-        setTimeout(() => {
-          ROOT_MODAL.classList.remove();
-        }, 300);
+        ROOT_MODAL.classList.remove("open");
       }
     });
     document
@@ -125,7 +123,9 @@ class comics {
 
     ROOT_COMICSENSE.addEventListener("click", ({ target }) => {
       if (target.classList.contains("open")) {
-        ROOT_COMICSENSE.classList.remove("open");
+        setTimeout(() => {
+          ROOT_COMICSENSE.classList.remove("open");
+        }, 300);
       }
     });
   }

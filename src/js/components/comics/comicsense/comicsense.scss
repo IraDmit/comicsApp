@@ -10,8 +10,11 @@
   visibility: hidden;
   transition: 0.3s;
   .comicsWrapper {
+    font-family: "Marvel", sans-serif;
+    background-color: #8e9599 !important;
     transform: translateY(-50%);
-    width: 470px;
+    max-width: 80%;
+    min-width: 20%;
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -22,18 +25,73 @@
     border-radius: 13px 0 0 13px;
     .comicsInfo {
       display: flex;
+      img {
+        margin: 0px 0px 10px 0;
+      }
       .info {
         display: flex;
         flex-direction: column;
-        a {
+        margin: 0 10px 20px 10px;
+        width: 100%;
+        .title {
           text-decoration: none;
+          display: flex;
+          flex-direction: column;
+          font-size: 30px;
+          font-weight: 400;
+          margin-bottom: 20px;
+          span {
+            font-size: 16px;
+          }
+        }
+        .date,
+        .pageCount {
+          margin-bottom: 10px;
         }
       }
+    }
+    .characterWrapper {
+      display: flex;
+      overflow-x: scroll;
+      &::-webkit-scrollbar {
+        height: 5px;
+      }
+      .character {
+        margin: 10px;
+        max-width: 100px;
+        position: relative;
+        img {
+          width: 100px;
+          height: 100%;
+        }
+        .name {
+          position: absolute;
+          z-index: 100;
+          background-color: #fff;
+          padding: 2px 8px 2px 2px;
+          bottom: 0;
+          left: 0;
+          font-size: 12px;
+          border-radius: 0 8px 0 0;
+        }
+      }
+    }
+    .authorWrapper {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      .name {
+        display: flex;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+    }
+    .description {
+      width: 50%;
     }
   }
   &.open {
     visibility: visible;
     opacity: 1;
-    right: 500px;
   }
 }

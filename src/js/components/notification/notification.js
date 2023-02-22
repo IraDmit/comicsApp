@@ -16,6 +16,7 @@ class notification {
         }, 100);
         this.notification = document.getElementsByClassName("notification")[0]
         console.log(this.notification);
+    
   }
 
   destroy() {
