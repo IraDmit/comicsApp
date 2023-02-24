@@ -4,17 +4,9 @@ import { ROOT_COMICSENSE } from "../../../constants/root";
 import "./comicsense.scss";
 
 class comicsense {
-  // {
-  //     id,
-  //     title,
-  //     thumbnail: { path, extension },
-  //     dates: {
-  //       0: { date },
-  //     },
-  //   }
+
   async render(obj) {
     let {
-      id,
       title,
       thumbnail: { path, extension },
       dates: {
@@ -30,9 +22,7 @@ class comicsense {
     let creators = "";
     let character = "";
     let characterWrapper = '';
-     let creator='';
-
-    // collectionURI
+    let creator='';
 
     const res = await getDataApi.getAllChar(characters.collectionURI)
     console.log(res);
@@ -51,7 +41,6 @@ class comicsense {
       });
     creator = `<div class="authorWrapper">Authors: ${creators}</div>`;
     } 
-
 
     const info = `<div class="comicsWrapper">
     <div class="comicsInfo">

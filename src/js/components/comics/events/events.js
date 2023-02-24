@@ -8,17 +8,19 @@ import {
 } from "../../../constants/api";
 import { ROOT_MODAL } from "../../../constants/root";
 
-class characters {
+class events {
     async render(uri){
        const result = await getDataApi.getData(uri);
-		this.renderContent(result.comics)
+       const result2 = await getDataApi.getData('http://gateway.marvel.com/v1/public/events/231');
+		// this.renderContent(result.comics)
+        console.log(result)
+        console.log(result2)
         return result.comics;
     }
 
-    renderContent(arrCharacters){
-		// console.log(arrCharacters)
+    renderContent(arrEvents){
         let content ='';
-        arrCharacters.forEach(({thumbnail:{path, extension}, name}) => {
+        arrEvents.forEach(({thumbnail:{path, extension}, name}) => {
             const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
             content += `<div class="character"> <img src="${imgSrc}"/><p class="name">${name}</div>`;
         });
@@ -27,4 +29,4 @@ class characters {
     }
 }
 
-export default new characters();
+export default new events();

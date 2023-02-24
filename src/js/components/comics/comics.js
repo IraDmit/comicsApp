@@ -12,11 +12,13 @@ import {
   ROOT_MODAL,
   ROOT_PRELOADER,
 } from "../../constants/root";
-import "./comics.scss";
-import characters from "./characters/characters";
 import error from "../error/error";
 import notification from "../notification/notification";
 import comicsense from "./comicsense/comicsense";
+import events from "./events/events";
+
+// styles
+import "./comics.scss";
 
 class comics {
   constructor() {
@@ -26,7 +28,7 @@ class comics {
 
   async render() {
     const res = await getDataApi.getData(API_URL + URL_COMICS);
-    console.log(res);
+    // console.log(res);
     res ? this.renderContent(res.comics) : error.render();
     ROOT_PRELOADER.classList.add("hide");
     this.limit = res.limit;
@@ -36,29 +38,21 @@ class comics {
   renderContent(res) {
     let content = "";
     res.forEach(
-      ({
+      async ({
         id,
         title,
         thumbnail: { path, extension },
         dates: {
           0: { date },
         },
+        events: { available, collectionURI },
       }) => {
         const uri = API_URL + URL_COMICS + "/" + id;
-        const uriCharacter =
-          API_URL + URL_COMICS + "/" + id + "/" + URL_CHARACTERS;
         const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
         if (!path.includes(IMG_NOT_AVAILABLE)) {
-          // console.log(uri);
-
-          // let div = document.createElement("div");
-          // div.classList.add("comicsItem");
-          // ROOT_DIV.append(div);
-
-          // const comic = `<div class='comicsItem'><p>${title} </p> <img src="${imgSrc}" /> </div>`;
-          // ROOT_DIV.insertAdjacentHTML('beforebegin', comic)
-
-          content += `<div class='comicsItem' data-uri-character="${uriCharacter}"> <button data-uri=${uri} class="moreInfo"> More info </button>  <p>${title} </p> <img src="${imgSrc}" /> <p class="date"> ${
+          content += `<div class='comicsItem' data-uri-events="${
+            available > 0 ? collectionURI : null
+          }"> <button data-uri=${uri} class="moreInfo"> More info </button>  <p>${title} </p> <img src="${imgSrc}" /> <p class="date"> ${
             date.split("T")[0]
           } </p> </div>`;
         }
@@ -70,19 +64,22 @@ class comics {
 
   comicsClickEvent(arr) {
     arr.forEach((el) => {
-      const uriComics = el.dataset.uriCharacter;
       const uri = el.querySelector(".moreInfo").dataset.uri;
       el.addEventListener("click", async ({ target: t }) => {
         if (t.classList.contains("moreInfo")) {
           const comicsenseInfo = await getDataApi.getDataSlug(uri);
           comicsense.render(comicsenseInfo);
         } else {
-          const arr = await characters.render(uriComics);
+          const uriEvents = el.dataset.uriEvents;
+          console.log(uriEvents);
+          const arr = await events.render(uriEvents);
           if (arr.length != 0) {
             ROOT_MODAL.classList.add("open");
           } else {
-            await notification.render();
-            await notification.eventListener();
+            if (!notification.notification) {
+              await notification.render();
+              await notification.eventListener();
+            }
           }
         }
       });
@@ -119,6 +116,7 @@ class comics {
       .addEventListener("click", ({ target }) => {
         this.result.sort((a, b) => (a.title > b.title ? 1 : -1));
         this.renderContent(this.result);
+        this.eventListener();
       });
 
     ROOT_COMICSENSE.addEventListener("click", ({ target }) => {
@@ -128,6 +126,18 @@ class comics {
         }, 300);
       }
     });
+    document
+      .querySelector(".eventFilter")
+      .addEventListener("click", ({ target }) => {
+        const eventFilter = this.result.filter((el) => {
+          if (el.events.available > 0) {
+            // console.log(el.events)
+            return el;
+          }
+        });
+        this.renderContent(eventFilter);
+        this.eventListener();
+      });
   }
 }
 
