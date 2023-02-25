@@ -7,7 +7,7 @@ class notification {
   render() {
     let div = document.createElement("div");
     div.classList.add("notification");
-    div.innerHTML = `<p class="closeX"> x </p> <p>Error download comics</p>`;
+    div.innerHTML = `<p class="closeX"> x </p> <p>No events!</p>`;
     ROOT_DIV.append(div);
     setTimeout(() => {
       div.classList.add("show");

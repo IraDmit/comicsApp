@@ -25,7 +25,6 @@ class comicsense {
     let creator='';
 
     const res = await getDataApi.getAllChar(characters.collectionURI)
-    console.log(res);
     
     if (res) {
       res.forEach(({thumbnail: {path, extension}, name}) => {

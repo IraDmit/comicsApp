@@ -51,7 +51,7 @@ class comics {
         const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
         if (!path.includes(IMG_NOT_AVAILABLE)) {
           content += `<div class='comicsItem' data-uri-events="${
-            available > 0 ? collectionURI : null
+            available > 0 ? collectionURI : ""
           }"> <button data-uri=${uri} class="moreInfo"> More info </button>  <p>${title} </p> <img src="${imgSrc}" /> <p class="date"> ${
             date.split("T")[0]
           } </p> </div>`;
@@ -71,11 +71,14 @@ class comics {
           comicsense.render(comicsenseInfo);
         } else {
           const uriEvents = el.dataset.uriEvents;
-          console.log(uriEvents);
-          const arr = await events.render(uriEvents);
-          if (arr.length != 0) {
+
+          if (uriEvents) {
+            console.log("true");
+            const arr = await events.render(uriEvents);
+            console.log(arr.length);
             ROOT_MODAL.classList.add("open");
           } else {
+            console.log("false");
             if (!notification.notification) {
               await notification.render();
               await notification.eventListener();
@@ -130,10 +133,7 @@ class comics {
       .querySelector(".eventFilter")
       .addEventListener("click", ({ target }) => {
         const eventFilter = this.result.filter((el) => {
-          if (el.events.available > 0) {
-            // console.log(el.events)
-            return el;
-          }
+          if (el.events.available > 0) return el;
         });
         this.renderContent(eventFilter);
         this.eventListener();
