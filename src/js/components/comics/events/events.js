@@ -8,7 +8,12 @@ import {
 } from "../../../constants/api";
 import { ROOT_MODAL } from "../../../constants/root";
 
+import "./events.scss";
+
 class events {
+  nextEventUri = '';
+  prevEventUri = '';
+
   async render(uri) {
     const result = await getDataApi.getData(uri);
     this.renderContent(result.comics[0]);
@@ -16,36 +21,55 @@ class events {
   }
 
   async renderContent(arrEvents) {
-
     let {
       title,
       thumbnail: { path, extension },
-      series: { name, resourceURI },
+      series: { collectionURI },
       characters,
       description,
       next,
       previous,
     } = arrEvents;
 
+    this.nextEventUri = next.resourceURI;
+    this.prevEventUri = previous.resourceURI;
+
     let contentCharacter = "";
     let series = "";
+
     const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
 
     const character = await getDataApi.getAllChar(characters.collectionURI);
+    const seriesComics = await getDataApi.getAllChar(collectionURI);
 
     character.forEach(({ thumbnail: { path, extension }, name }) => {
       const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
       contentCharacter += `<div class="characterItem"> <img src="${imgSrc}"/><p class="name">${name}</div>`;
     });
-    const events_wrapper = `<div class="modal-content">
+
+    seriesComics.forEach(({ thumbnail: { path, extension }, title }) => {
+      const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
+      series += `<div class="seriesItem"> <img src="${imgSrc}"/><p class="name">${title}</div>`;
+    });
+
+    const events_wrapper = `<div class="modal-content-event">
     
     <div class="eventInfo">
-       <img src="${imgSrc}" alt="" />
-      <p class="title">${title}</p>
-      <p class="description">${description}</p>
+    <div class="close"> X </div>
+
+    ${previous ? "<div class='butEvent prev'> previous event </div>" : ""}
+    ${next ? "<div class='butEvent next'> next event </div>" : ""}
+       <img src="${imgSrc}" alt="${imgSrc}" />
+       <div class="text"> 
+        <p class="title">${title}</p>
+        <p class="description">${description}</p>
+      </div>   
     </div>
     <div class="characterList">
-    <!-- ${contentCharacter} --> 
+     ${contentCharacter} 
+    </div>
+    <div class="seriesList">
+    ${series}
     </div>
   </div>
     

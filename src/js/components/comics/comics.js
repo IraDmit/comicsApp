@@ -138,6 +138,13 @@ class comics {
         this.renderContent(eventFilter);
         this.eventListener();
       });
+      ROOT_MODAL.addEventListener("click", ({target})=>{
+      if(target.classList.contains('prev')){
+        events.render(events.prevEventUri)
+      } else if(target.classList.contains('next')){
+        events.render(events.nextEventUri)
+      }
+    });
   }
 }
 

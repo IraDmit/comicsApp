@@ -1,0 +1,49 @@
+.modal-content-event {
+  width: 100%;
+  background-color: #fff;
+  flex-wrap: wrap;
+  .eventInfo {
+    display: flex;
+    position: relative;
+    width: 100%;
+
+    .butEvent {
+      cursor: pointer;
+      border-width: 1px;
+      border-style: solid;
+      background-color: gray;
+      width: 100px;
+      text-align: center;
+      color: #ffffff;
+      padding: 10px 20px;
+      &.next {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      &.prev {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  .characterList {
+    display: flex;
+    margin: 10px;
+    overflow: scroll;
+    .characterItem {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .seriesList {
+    display: flex;
+    margin: 10px;
+    overflow: scroll;
+    .seriesItem {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
