@@ -1,11 +1,9 @@
 // =====================================================================================================================
 .header {
   width: 100%;
-  background-color: #fff;
-  &.sticky {
-    // ..стили для липкого хедера
-  }
-  // .header__container
+  background-color: #000;
+  color: #fff;
+  background: url(https://i.pinimg.com/564x/b2/7d/5b/b27d5bb4b07b24be965fbffa9740f31e.jpg) ;
   &__container {
     height: rem($headerHeight);
     display: flex;

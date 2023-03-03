@@ -4,7 +4,6 @@ import { ROOT_COMICSENSE } from "../../../constants/root";
 import "./comicsense.scss";
 
 class comicsense {
-
   async render(obj) {
     let {
       title,
@@ -21,25 +20,26 @@ class comicsense {
     const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
     let creators = "";
     let character = "";
-    let characterWrapper = '';
-    let creator='';
+    let characterWrapper = "";
+    let creator = "";
 
-    const res = await getDataApi.getAllChar(characters.collectionURI)
-    
+    const res = await getDataApi.getAllChar(characters.collectionURI);
+
     if (res) {
-      res.forEach(({thumbnail: {path, extension}, name}) => {
+      console.log(res)
+      res.forEach(({ thumbnail: { path, extension }, name }) => {
         const imgSrc = path + "/" + IMG_STANDARD_XLARGE + "." + extension;
         character += `<div class="character"> <img src="${imgSrc}"/><p class="name">${name}</p></div>`;
       });
 
-      characterWrapper = `<div class="characterWrapper"> ${character} </div>`;
+      characterWrapper = res.length ? `<div class="characterWrapper"> ${character} </div>` : '';
     }
-    if ( obj.creators.items.length ) {
+    if (obj.creators.items.length) {
       obj.creators.items.forEach(({ resourceURI, name, role }) => {
         creators += `<a href="${resourceURI}" class="name"> ${name} <span> (${role})</span> </a>`;
       });
-    creator = `<div class="authorWrapper">Authors: ${creators}</div>`;
-    } 
+      creator = `<div class="authorWrapper">Authors: ${creators}</div>`;
+    }
 
     const info = `<div class="comicsWrapper">
     <div class="comicsInfo">

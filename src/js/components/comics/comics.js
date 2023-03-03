@@ -28,11 +28,11 @@ class comics {
 
   async render() {
     const res = await getDataApi.getData(API_URL + URL_COMICS);
-    // console.log(res);
     res ? this.renderContent(res.comics) : error.render();
     ROOT_PRELOADER.classList.add("hide");
     this.limit = res.limit;
     this.result = res.comics;
+    this.allComics = res.comics;
   }
 
   renderContent(res) {
@@ -73,12 +73,10 @@ class comics {
           const uriEvents = el.dataset.uriEvents;
 
           if (uriEvents) {
-            console.log("true");
-            const arr = await events.render(uriEvents);
-            console.log(arr.length);
+            await events.render(uriEvents);
+            events.eventListener();
             ROOT_MODAL.classList.add("open");
           } else {
-            console.log("false");
             if (!notification.notification) {
               await notification.render();
               await notification.eventListener();
@@ -91,11 +89,6 @@ class comics {
 
   eventListener() {
     this.comicsClickEvent(document.querySelectorAll(".comicsItem"));
-    ROOT_MODAL.addEventListener("click", ({ target }) => {
-      if (target.classList.contains("open")) {
-        ROOT_MODAL.classList.remove("open");
-      }
-    });
     document
       .querySelector(".renderComics")
       .addEventListener("click", async (e) => {
@@ -135,16 +128,15 @@ class comics {
         const eventFilter = this.result.filter((el) => {
           if (el.events.available > 0) return el;
         });
-        this.renderContent(eventFilter);
+        this.result = eventFilter;
+        this.renderContent(this.result);
         this.eventListener();
       });
-      ROOT_MODAL.addEventListener("click", ({target})=>{
-      if(target.classList.contains('prev')){
-        events.render(events.prevEventUri)
-      } else if(target.classList.contains('next')){
-        events.render(events.nextEventUri)
-      }
-    });
+    document
+      .querySelector(".allComics")
+      .addEventListener("click", ({ target }) => {
+        this.render();
+      });
   }
 }
 
