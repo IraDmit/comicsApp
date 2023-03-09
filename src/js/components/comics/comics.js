@@ -145,7 +145,7 @@ class comics {
       });
       console.log(searchComics);
       this.renderContent(searchComics);
-      
+      this.eventListener();
     });
   }
 }
