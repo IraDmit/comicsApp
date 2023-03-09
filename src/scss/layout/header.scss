@@ -3,11 +3,79 @@
   width: 100%;
   background-color: #000;
   color: #fff;
-  background: url(https://i.pinimg.com/564x/b2/7d/5b/b27d5bb4b07b24be965fbffa9740f31e.jpg) ;
+  // opacity: 0.75;
+  position: relative;
+  font-family: "Marvel", sans-serif;
+  &::before {
+    content: "";
+    background-image: url(https://i.pinimg.com/564x/b2/7d/5b/b27d5bb4b07b24be965fbffa9740f31e.jpg);
+    // background-size: cover;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.75;
+  }
+  .sorts,
+  input, .logo {
+    position: relative;
+    font-size: 18px;
+  }
+  .logo{
+    background-color: #fff;
+    display: flex;
+    font-family: Dark-squad;
+    border-radius: 7px;
+    border: 1px solid #000;
+    img{
+    max-width: 70px;
+    max-height: 70px;
+    margin-right: 5px;
+  }
+  .textLogo{
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    font-size: 22px;
+    .vampir{
+      margin-bottom: 5px;
+    }
+  }
+  }
+  .sorts {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 13px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000;
+    .sort {
+      padding: 2px;
+      background-color: #fff;
+      &:not(:last-of-type) {
+        margin-bottom: 8px;
+      }
+      &:hover {
+        background-color: #ced4da;
+      }
+    }
+  }
   &__container {
     height: rem($headerHeight);
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    input {
+      padding: 13px 25px;
+      max-width: 658px;
+      width: 100%;
+      border-radius: 13px;
+      &:hover {
+        box-shadow: inset 0px 0px 10px rgba(#848b92, 0.7);
+      }
+    }
   }
 }
 // =====================================================================================================================

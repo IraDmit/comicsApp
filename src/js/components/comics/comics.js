@@ -9,6 +9,7 @@ import { getDataApi } from "../../helpers/getApi";
 import {
   ROOT_COMICSENSE,
   ROOT_DIV,
+  ROOT_INPUT,
   ROOT_MODAL,
   ROOT_PRELOADER,
 } from "../../constants/root";
@@ -32,7 +33,6 @@ class comics {
     ROOT_PRELOADER.classList.add("hide");
     this.limit = res.limit;
     this.result = res.comics;
-    this.allComics = res.comics;
   }
 
   renderContent(res) {
@@ -107,13 +107,6 @@ class comics {
         ROOT_PRELOADER.classList.add("hide");
         this.comicsClickEvent(document.querySelectorAll(".comicsItem"));
       });
-    document
-      .querySelector(".titleSort")
-      .addEventListener("click", ({ target }) => {
-        this.result.sort((a, b) => (a.title > b.title ? 1 : -1));
-        this.renderContent(this.result);
-        this.eventListener();
-      });
 
     ROOT_COMICSENSE.addEventListener("click", ({ target }) => {
       if (target.classList.contains("open")) {
@@ -122,6 +115,14 @@ class comics {
         }, 300);
       }
     });
+
+    document
+      .querySelector(".titleSort")
+      .addEventListener("click", ({ target }) => {
+        this.result.sort((a, b) => (a.title > b.title ? 1 : -1));
+        this.renderContent(this.result);
+        this.eventListener();
+      });
     document
       .querySelector(".eventFilter")
       .addEventListener("click", ({ target }) => {
@@ -137,6 +138,15 @@ class comics {
       .addEventListener("click", ({ target }) => {
         this.render();
       });
+
+    ROOT_INPUT.addEventListener("input", ({ target }) => {
+      const searchComics = this.result.filter((element) => {
+        if(element.title.toLowerCase().includes(target.value.toLowerCase())) return element; 
+      });
+      console.log(searchComics);
+      this.renderContent(searchComics);
+      
+    });
   }
 }
 
