@@ -143,7 +143,6 @@ class comics {
       const searchComics = this.result.filter((element) => {
         if(element.title.toLowerCase().includes(target.value.toLowerCase())) return element; 
       });
-      console.log(searchComics);
       this.renderContent(searchComics);
       this.eventListener();
     });

@@ -23,6 +23,12 @@
     @media (max-width: 1280px) {
       @include columnCount(4);
     }
+    @media (max-width: 991px){
+      @include columnCount(3);
+    } 
+    @media (max-width: 768px){
+      @include columnCount(3);
+    }
     .date{
       margin-left: auto;
     }

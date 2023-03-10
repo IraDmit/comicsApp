@@ -3,13 +3,11 @@
   width: 100%;
   background-color: #000;
   color: #fff;
-  // opacity: 0.75;
   position: relative;
   font-family: "Marvel", sans-serif;
   &::before {
     content: "";
     background-image: url(https://i.pinimg.com/564x/b2/7d/5b/b27d5bb4b07b24be965fbffa9740f31e.jpg);
-    // background-size: cover;
     height: 100%;
     position: absolute;
     top: 0px;
@@ -19,30 +17,31 @@
     opacity: 0.75;
   }
   .sorts,
-  input, .logo {
+  input,
+  .logo {
     position: relative;
     font-size: 18px;
   }
-  .logo{
+  .logo {
     background-color: #fff;
     display: flex;
     font-family: Dark-squad;
     border-radius: 7px;
     border: 1px solid #000;
-    img{
-    max-width: 70px;
-    max-height: 70px;
-    margin-right: 5px;
-  }
-  .textLogo{
-    display: flex;
-    align-self: center;
-    flex-direction: column;
-    font-size: 22px;
-    .vampir{
-      margin-bottom: 5px;
+    img {
+      max-width: 70px;
+      max-height: 70px;
+      margin-right: 5px;
     }
-  }
+    .textLogo {
+      display: flex;
+      align-self: center;
+      flex-direction: column;
+      font-size: 22px;
+      .vampir {
+        margin-bottom: 5px;
+      }
+    }
   }
   .sorts {
     background-color: #fff;
@@ -73,9 +72,33 @@
       max-width: 658px;
       width: 100%;
       border-radius: 13px;
-      &:hover {
+      &:hover,
+      &:focus {
         box-shadow: inset 0px 0px 10px rgba(#848b92, 0.7);
       }
+    }
+  }
+  @media (max-width: 991px) {
+    input{
+      margin: 0 20px;
+    }
+    .sorts {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    input{
+      margin: 0 20px;
+    }
+    .sorts {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 }

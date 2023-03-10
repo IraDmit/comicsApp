@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_KEY } from '../constants/api';
 
 class GetDataApi {
-    async getData(url, limit = 100) {
+    async getData(url, limit = 20) {
         try {
             const response = await axios.get(url, {
                 params: {
